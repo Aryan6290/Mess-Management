@@ -21,6 +21,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(LoginActivity.this,LoginAdminActivity.class);
+                intent.putExtra("Admin",1);
                 startActivity(intent);
             }
         });
@@ -28,7 +29,8 @@ public class LoginActivity extends AppCompatActivity {
         boarderLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(LoginActivity.this,LoginBoarderActivity.class);
+                Intent intent=new Intent(LoginActivity.this,LoginAdminActivity.class);
+                intent.putExtra("Admin",2);
                 startActivity(intent);
             }
         });
