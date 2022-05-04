@@ -37,8 +37,24 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     //material design
-    implementation 'com.google.android.material:material:1.6.0-alpha03'
+    implementation 'com.google.android.material:material:1.7.0-alpha01'
 
     //circle image
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    //retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.6.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.0'
+    implementation "com.squareup.okhttp3:logging-interceptor:4.5.0"
+
+    //volley
+    implementation 'com.android.volley:volley:1.2.1'
+
+    //material design
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'com.google.android.material:material:1.7.0-alpha01'
+
+    //glide library
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 }

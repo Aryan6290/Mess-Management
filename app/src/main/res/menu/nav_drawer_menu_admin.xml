@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/addBoarder"
+        android:icon="@drawable/ic_person_add"
+        android:title="Add Boarder" />
+
+    <item android:id="@+id/updatePassword"
+        android:icon="@drawable/ic_security"
+        android:title="Update Password"/>
+
+    <item android:id="@+id/updateMenu"
+        android:icon="@drawable/ic_menu"
+        android:title="Update Menu"/>
+
+    <item android:id="@+id/mealCountsDetails"
+        android:icon="@drawable/ic_create"
+        android:title="Meal Count Details"/>
+
+    <item android:id="@+id/logoutAdmin"
+        android:icon="@drawable/logout_svgrepo_com"
+        android:title="Log out"/>
+</menu>

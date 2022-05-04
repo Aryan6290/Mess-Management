@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddBoarderAdminActivity">
+
+    <TextView
+        android:id="@+id/addBoarderText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Add Boarders"
+        android:textAlignment="center"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/addBoarderNameText"
+        style="@style/LoginTextInputLayoutStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+        app:startIconTint="@color/black"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:theme="@style/LoginTextInputLayoutStyle"
+        app:boxBackgroundMode="outline"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:textColorHint="@color/black"
+        app:boxStrokeColor="@color/colorPrimaryDark"
+        app:startIconDrawable="@drawable/ic_person_24"
+        app:boxStrokeWidth="3dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addBoarderText">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/addBoarderNameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:textColor="@color/colorPrimaryDark"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/addBoarderRollNoText"
+        style="@style/LoginTextInputLayoutStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Roll No"
+        app:startIconTint="@color/black"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:theme="@style/LoginTextInputLayoutStyle"
+        app:boxBackgroundMode="outline"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:textColorHint="@color/black"
+        app:boxStrokeColor="@color/colorPrimaryDark"
+        app:startIconDrawable="@drawable/ic_number"
+        app:boxStrokeWidth="3dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addBoarderNameText">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/addBoarderRollNoEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textColor="@color/colorPrimaryDark"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/addBoarderPasswordText"
+        style="@style/LoginTextInputLayoutStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        app:startIconTint="@color/black"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:theme="@style/LoginTextInputLayoutStyle"
+        app:boxBackgroundMode="outline"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:textColorHint="@color/black"
+        app:boxStrokeColor="@color/colorPrimaryDark"
+        app:startIconDrawable="@drawable/ic_privacy_tip"
+        app:boxStrokeWidth="3dp"
+        app:endIconMode="password_toggle"
+        app:endIconTint="@color/colorPrimaryDark"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/addBoarderRollNoText">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/addBoarderPasswordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textColor="@color/colorPrimaryDark"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/addBoarderButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:text="Add Boarder"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:background="@drawable/custom_button"
+        app:layout_constraintTop_toBottomOf="@id/addBoarderPasswordText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

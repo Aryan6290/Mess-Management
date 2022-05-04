@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Mess_Management_App</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
+    <string-array name="type">
+        <item>Veg</item>
+        <item>Non-Veg</item>
+    </string-array>
+
+    <string-array name="time">
+        <item>day</item>
+        <item>night</item>
+    </string-array>
 </resources>

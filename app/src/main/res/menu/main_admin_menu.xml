@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/adminDatePicker"
+        android:title="Pick Date"
+        android:icon="@drawable/ic_calendar"
+        app:showAsAction="always" />
+
+    <item android:id="@+id/iconItem"
+        android:title="Filter"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_filter">
+
+        <menu>
+            <item android:id="@+id/dayTextAdmin"
+                android:title="Day"/>
+
+            <item android:id="@+id/nighTextAdmin"
+                android:title="Night"/>
+        </menu>
+
+    </item>
+
+</menu>

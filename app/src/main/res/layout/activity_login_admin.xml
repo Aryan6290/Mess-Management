@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Mess Managment App"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="30sp"
@@ -55,7 +55,7 @@
                 android:id="@+id/loginText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="30dp"
                 android:text="Login as Admin"
                 android:textAlignment="center"
                 android:textColor="@color/primaryTextColor"
@@ -68,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="User Id"
-                app:startIconTint="@color/primaryTextColor"
+                app:startIconTint="@color/colorPrimaryDark"
                 android:backgroundTint="@color/colorPrimaryDark"
                 android:theme="@style/LoginTextInputLayoutStyle"
                 app:boxBackgroundMode="outline"
@@ -90,6 +90,32 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/rollNoAdmin"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Roll No"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
+                android:textColorHint="@color/primaryTextColor"
+                app:boxStrokeColor="@color/colorPrimaryDark"
+                app:startIconDrawable="@drawable/ic_number"
+                app:startIconTint="@color/colorPrimaryDark"
+                app:boxStrokeWidth="3dp"
+                app:endIconTint="@color/colorPrimaryDark">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/rollNoAdminEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="@color/colorPrimaryDark"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/passwordAdmin"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -102,10 +128,10 @@
         android:textColorHint="@color/primaryTextColor"
         app:boxStrokeColor="@color/colorPrimaryDark"
         app:startIconDrawable="@drawable/ic_privacy_tip"
-        app:startIconTint="@color/primaryTextColor"
+        app:startIconTint="@color/colorPrimaryDark"
         app:boxStrokeWidth="3dp"
         app:endIconMode="password_toggle"
-        app:endIconTint="@color/primaryTextColor">
+        app:endIconTint="@color/colorPrimaryDark">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passwordAdminEditText"
@@ -115,6 +141,9 @@
             android:textColor="@color/colorPrimaryDark"/>
 
     </com.google.android.material.textfield.TextInputLayout>
+
+
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/adminLoginButton"

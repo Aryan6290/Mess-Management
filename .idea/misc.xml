@@ -3,19 +3,47 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/drawable/box.xml" value="0.1" />
         <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/drawable/box_color.xml" value="0.143" />
         <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/drawable/costume_background.xml" value="0.143" />
         <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/drawable/costume_background2.xml" value="0.1995" />
         <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/drawable/costume_background3.xml" value="0.1995" />
+        <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/drawable/costume_dialog.xml" value="0.1285" />
         <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/drawable/custom_button.xml" value="0.143" />
+        <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/drawable/gradient.xml" value="0.1" />
+        <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/drawable/ic_menu.xml" value="0.1" />
         <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/drawable/ic_person_24.xml" value="0.1995" />
+        <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/drawable/ic_person_add.xml" value="0.1" />
         <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/drawable/login_button.xml" value="0.1995" />
+        <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/layout/activity_add_boarder_admin.xml" value="0.2" />
+        <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/layout/activity_choose_meal_boarder.xml" value="0.264" />
         <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/layout/activity_login.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/layout/activity_login_admin.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/layout/activity_login_boarder.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/layout/activity_main_admin.xml" value="0.24010416666666667" />
-        <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/layout/activity_main_boarder.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/layout/activity_main_admin.xml" value="0.2" />
+        <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/layout/activity_main_boarder.xml" value="0.1" />
+        <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/layout/activity_meal_count_detail_admin.xml" value="0.12037037037037036" />
+        <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/layout/activity_meal_on_off_boarder.xml" value="0.12037037037037036" />
+        <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/layout/activity_set_meal.xml" value="0.12037037037037036" />
         <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/layout/activity_splash.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/layout/activity_update_info_boarder.xml" value="0.12037037037037036" />
+        <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/layout/activity_update_menu_admin.xml" value="0.2" />
+        <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/layout/activity_update_password_admin.xml" value="0.176" />
+        <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/layout/activity_update_password_boarder.xml" value="0.12037037037037036" />
+        <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/layout/costume_dialog.xml" value="0.176" />
+        <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/layout/dialog.xml" value="0.128" />
+        <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/layout/dropdown_item.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/layout/item_meal.xml" value="0.4" />
+        <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/layout/nav_drawer_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/layout/nav_header.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/layout/nav_header_admin.xml" value="0.1" />
+        <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/layout/nav_header_boarder.xml" value="0.12037037037037036" />
+        <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/menu/choose_date.xml" value="0.12037037037037036" />
+        <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/menu/main_admin_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/menu/nav_drawer_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/menu/nav_drawer_menu_admin.xml" value="0.12037037037037036" />
+        <entry key="..\:/Users/Ranjan kumar das/AndroidStudioProjects/Mess-Management-master/app/src/main/res/menu/nav_drawer_menu_boarder.xml" value="0.12037037037037036" />
         <entry key="..\:/Users/Rohan Ray/AndroidStudioProjects/Mess_Management_App/app/src/main/res/drawable/custom_button.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/Rohan Ray/AndroidStudioProjects/Mess_Management_App/app/src/main/res/drawable/ic_launcher_background.xml" value="0.18796296296296297" />
         <entry key="..\:/Users/Rohan Ray/AndroidStudioProjects/Mess_Management_App/app/src/main/res/layout/activity_login.xml" value="0.16666666666666666" />
