@@ -12,9 +12,6 @@
         android:icon="@drawable/ic_set_meal"
         android:title="Choose Meal"/>
 
-    <item android:id="@+id/mealOnOff"
-        android:icon="@drawable/ic_swap_horizontal"
-        android:title="Meal On/Off"/>
 
     <item android:id="@+id/logoutBoarder"
         android:icon="@drawable/logout_svgrepo_com"

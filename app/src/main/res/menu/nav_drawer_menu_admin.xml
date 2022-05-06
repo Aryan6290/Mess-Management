@@ -12,9 +12,6 @@
         android:icon="@drawable/ic_menu"
         android:title="Update Menu"/>
 
-    <item android:id="@+id/mealCountsDetails"
-        android:icon="@drawable/ic_create"
-        android:title="Meal Count Details"/>
 
     <item android:id="@+id/logoutAdmin"
         android:icon="@drawable/logout_svgrepo_com"

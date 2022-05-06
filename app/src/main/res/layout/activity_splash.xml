@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:fontFamily="sans-serif-condensed-light"
-        android:text="Made by Me"
+        android:text="Mess Management"
         android:textStyle="italic"
         android:textAlignment="center"
         android:textColor="@color/black"

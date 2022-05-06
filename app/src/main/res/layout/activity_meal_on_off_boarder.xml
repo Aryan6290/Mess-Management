@@ -7,17 +7,91 @@
     tools:context=".MealOnOffBoarderActivity">
 
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/hiTextOnOff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="10dp"
+        android:text="Hi,"
+        android:textSize="30sp"
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+    <TextView
+        android:id="@+id/nameTextOnOff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Ranjan Kumar Das"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:textColor="@color/primaryTextColor"
+        app:layout_constraintLeft_toRightOf="@id/hiTextOnOff"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+    <TextView
+        android:id="@+id/textText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="5dp"
+        android:text="Do you want off Your meal?"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/hiTextOnOff"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+
+    <RadioGroup
+        android:id="@+id/radioGroupOnOff"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Meal On/Off Activity"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="40sp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/textText"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent">
 
+        <RadioButton
+            android:id="@+id/yesButton"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:text="Yes"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:textColor="@color/black"/>
+
+        <RadioButton
+            android:id="@+id/NoButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="50dp"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:textColor="@color/black"/>
+    </RadioGroup>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/adminLoginButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:text="Save"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:background="@drawable/custom_button"
+        app:layout_constraintTop_toBottomOf="@id/radioGroupOnOff"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

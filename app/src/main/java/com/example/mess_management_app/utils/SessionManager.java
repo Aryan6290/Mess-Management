@@ -2,6 +2,7 @@ package com.example.mess_management_app.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.Uri;
 
 import com.example.mess_management_app.model.Data;
 import com.example.mess_management_app.model.LoginResponse;
@@ -23,14 +24,26 @@ public class SessionManager {
         editor.apply();
     }
 
-   public void saveUser(Data user){
+   public void saveUser(String _id,String rollNo,String userName){
         SharedPreferences pref=context.getSharedPreferences("shared_pref",Context.MODE_PRIVATE);
        SharedPreferences.Editor editor= pref.edit();
-       editor.putString("_id", user.get_id());
-       editor.putString("rollNo", user.getRollNo());
-       editor.putString("userName", user.getUserName());
+       editor.putString("_id", _id);
+       editor.putString("rollNo", rollNo);
+       editor.putString("userName", userName);
        editor.putBoolean("logged",true);
        editor.apply();
+   }
+
+   public void saveImage(String image){
+       SharedPreferences pref=context.getSharedPreferences("shared_pref",Context.MODE_PRIVATE);
+       SharedPreferences.Editor editor= pref.edit();
+       editor.putString("image",image);
+       editor.apply();
+   }
+
+   public String getImage(){
+       SharedPreferences pref=context.getSharedPreferences("shared_pref",Context.MODE_PRIVATE);
+       return pref.getString("image",null);
    }
 
    public void saveTypeSessionManager(String type){

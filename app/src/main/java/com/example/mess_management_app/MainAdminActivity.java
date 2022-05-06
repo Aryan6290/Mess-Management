@@ -6,12 +6,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.preference.DialogPreference;
+import android.util.Base64;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.Request;
@@ -21,6 +31,10 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.mess_management_app.adapter.MealAdapter;
 import com.example.mess_management_app.model.Meals;
 import com.example.mess_management_app.utils.SessionManager;
+import com.google.android.material.datepicker.CalendarConstraints;
+import com.google.android.material.datepicker.DateValidatorPointForward;
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
@@ -42,6 +56,8 @@ public class MainAdminActivity extends AppCompatActivity {
     MealAdapter mealAdapter;
     TextView totalCountShow,totalNonVegCountShow,totalVegCountShow;
     SessionManager sessionManager;
+    String selectedDate,date;
+    ImageView profilePic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +70,7 @@ public class MainAdminActivity extends AppCompatActivity {
         totalNonVegCountShow=findViewById(R.id.TotalNonVegCountShow);
         totalVegCountShow=findViewById(R.id.TotalVegCountShow);
 
+
         sessionManager=new SessionManager(MainAdminActivity.this);
 
         toggle=new ActionBarDrawerToggle(this,drawerLayout,R.string.open,R.string.close);
@@ -61,7 +78,13 @@ public class MainAdminActivity extends AppCompatActivity {
         toggle.syncState();
         String type="day";
 
-        showAllDetails(type);
+        SimpleDateFormat sdfe = new SimpleDateFormat("dd/MM/yy");
+         date = sdfe.format(new Date());
+         selectedDate=date;
+        showAllDetails(type,date);
+
+
+
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -83,16 +106,8 @@ public class MainAdminActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
 
-                if(item.getItemId()==R.id.mealCountsDetails){
-                    Intent intent=new Intent(MainAdminActivity.this,MealCountDetailAdminActivity.class);
-                    startActivity(intent);
-                }
-
                 if(item.getItemId()==R.id.logoutAdmin){
-                    Intent intent=new Intent(MainAdminActivity.this,LoginActivity.class);
-                    sessionManager.logOut();
-                    startActivity(intent);
-                    finish();
+                    exitDialog();
                 }
                 drawerLayout.closeDrawers();
                 return true;
@@ -100,9 +115,47 @@ public class MainAdminActivity extends AppCompatActivity {
         });
     }
 
+    private void exitDialog(){
+        new AlertDialog.Builder(MainAdminActivity.this)
+                .setMessage("Are you sure want to exit?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent=new Intent(MainAdminActivity.this,LoginActivity.class);
+                        sessionManager.logOut();
+                        startActivity(intent);
+                        finish();
+                    }
+                })
+                .setNegativeButton("No",null)
+                .show();
+    }
 
 
-    private void showAllDetails(String time) {
+    private void datePicker(){
+        //calendar constraints
+        CalendarConstraints.Builder calendarConstraintBuilder = new CalendarConstraints.Builder();
+        calendarConstraintBuilder.setValidator(DateValidatorPointForward.now());
+
+        MaterialDatePicker.Builder builder=MaterialDatePicker.Builder.datePicker();
+        builder.setTitleText("SELECT A DATE");
+        builder.setCalendarConstraints(calendarConstraintBuilder.build());
+        MaterialDatePicker materialDatePicker=builder.build();
+
+        materialDatePicker.show(getSupportFragmentManager(),"DATE_PICKER");
+
+        materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
+            @Override
+            public void onPositiveButtonClick(Object selection) {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+                selectedDate = sdf.format(selection);
+                showAllDetails("day",selectedDate);
+            }
+        });
+    }
+
+    private void showAllDetails(String time,String datef) {
 
         String url = "https://kgec-mess-backend.herokuapp.com/api/meal/get/all";
 
@@ -110,8 +163,6 @@ public class MainAdminActivity extends AppCompatActivity {
         pDialog.setMessage("Loading...PLease wait");
         pDialog.show();
 
-        SimpleDateFormat sdfe = new SimpleDateFormat("dd/MM/yy");
-        String datef = sdfe.format(new Date());
 
         Map params = new HashMap();
         params.put("date", datef);
@@ -206,14 +257,15 @@ public class MainAdminActivity extends AppCompatActivity {
 
         switch (item.getItemId()){
             case R.id.dayTextAdmin:
-                showAllDetails("day");
+                showAllDetails("day",selectedDate);
                 return true;
 
             case R.id.nighTextAdmin:
-                showAllDetails("night");
+                showAllDetails("night",selectedDate);
                 return true;
 
             case R.id.adminDatePicker:
+                datePicker();
                 return true;
 
         }

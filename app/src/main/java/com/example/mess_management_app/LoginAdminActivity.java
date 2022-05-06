@@ -112,7 +112,7 @@ public class LoginAdminActivity extends AppCompatActivity {
                 try {
                     JSONObject jsonObject=response.getJSONObject("data");
                     sessionManager.saveToken(response.getString("token"));
-                    sessionManager.saveUser(new Data(jsonObject.getString("_id"),jsonObject.getString("rollNo"),jsonObject.getString("userName")));
+                    sessionManager.saveUser(jsonObject.getString("_id"),jsonObject.getString("rollNo"),jsonObject.getString("userName"));
                     sessionManager.saveTypeSessionManager(type);
                     Toast.makeText(LoginAdminActivity.this, response.getString("message"), Toast.LENGTH_SHORT).show();
                     if(id==1){
@@ -133,10 +133,15 @@ public class LoginAdminActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 String body="";
-                try {
-                    body = new String(error.networkResponse.data,"UTF-8");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
+                //get status code here
+                String statusCode = String.valueOf(error.networkResponse.statusCode);
+                //get response body and parse with appropriate encoding
+                if(error.networkResponse.data!=null) {
+                    try {
+                        body = new String(error.networkResponse.data,"UTF-8");
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
                 }
                 Toast.makeText(LoginAdminActivity.this,body.substring(12,body.length()-2),Toast.LENGTH_LONG).show();
                 pDialog.dismiss();

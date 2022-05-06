@@ -6,15 +6,10 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
-import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -25,10 +20,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -53,10 +46,8 @@ import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -64,6 +55,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -78,6 +70,7 @@ public class ChooseMealBoarderActivity extends AppCompatActivity {
     TextView dayType,nightType,nameText,dateToday;
     String selectedTime,selectedType,userId,selectedDate,responseShow;
     CardView dayCardView,nightCardView;
+    long timeInMilliseconds = 0;
 
 
     @Override
@@ -94,7 +87,8 @@ public class ChooseMealBoarderActivity extends AppCompatActivity {
 
 
         sessionManager=new SessionManager(ChooseMealBoarderActivity.this);
-        Log.d("admin meal",sessionManager.getUser().get_id());
+        Log.d("admin meal id",sessionManager.getUser().get_id());
+        Log.d("admin meal username",sessionManager.getUser().getUserName());
         nameText.setText(sessionManager.getUser().getUserName());
         arrayList=new ArrayList();
 
@@ -120,10 +114,9 @@ public class ChooseMealBoarderActivity extends AppCompatActivity {
 
         actionBar.setDisplayHomeAsUpEnabled(true);
         //mDateShow=findViewById(R.id.dateDayShow);
+
+
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
-
-
-
         int date=calendar.get(Calendar.DATE);
         // previous MARCH
         Log.d("date start", String.valueOf(date));
@@ -136,7 +129,6 @@ public class ChooseMealBoarderActivity extends AppCompatActivity {
         Date end=  calendar.getTime();
         Log.d("date", String.valueOf(end));
 
-        long timeInMilliseconds = 0;
 
         SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy");
         try {
@@ -149,18 +141,17 @@ public class ChooseMealBoarderActivity extends AppCompatActivity {
         
         Log.d("time in ms",String.valueOf(timeInMilliseconds));
 
-        CalendarConstraints.Builder calendarConstraintBuilder = new CalendarConstraints.Builder();
 
+        //calendar constraints
+        CalendarConstraints.Builder calendarConstraintBuilder = new CalendarConstraints.Builder();
         calendarConstraintBuilder.setValidator(DateValidatorPointForward.now());
 
-        calendarConstraintBuilder.setStart(start);
-       calendarConstraintBuilder.setEnd(timeInMilliseconds);
 
         //material date picker
         MaterialDatePicker.Builder<Long> builder=MaterialDatePicker.Builder.datePicker();
         builder.setTitleText("Select a Date");
         builder.setCalendarConstraints(calendarConstraintBuilder.build());
-         materialDatePicker= builder.build();
+        materialDatePicker= builder.build();
     }
 
     private void showMealDetail(String date)  {
@@ -202,7 +193,7 @@ public class ChooseMealBoarderActivity extends AppCompatActivity {
 
                             if(i.getTime().equals("night")){
                                 nightType.setText(i.getType());
-                                nightType.setVisibility(View.VISIBLE);
+                              //  nightType.setVisibility(View.VISIBLE);
                                 nightCardView.setVisibility(View.VISIBLE);
                             }
 
@@ -213,7 +204,7 @@ public class ChooseMealBoarderActivity extends AppCompatActivity {
 
                             if(i.getTime().equals("day")){
                                 dayType.setText(i.getType());
-                                dayType.setVisibility(View.VISIBLE);
+                               // dayType.setVisibility(View.VISIBLE);
                                 dayCardView.setVisibility(View.VISIBLE);
                             }
                         }
@@ -256,6 +247,7 @@ public class ChooseMealBoarderActivity extends AppCompatActivity {
     void showCalendar(){
         materialDatePicker.show(getSupportFragmentManager(),"DATE_PICKER");
         materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Long>() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onPositiveButtonClick(Long selection) {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
@@ -263,8 +255,7 @@ public class ChooseMealBoarderActivity extends AppCompatActivity {
                 if(selectedDate!=null){
                     dateToday.setText(selectedDate);
                 }
-
-               showMealDetail(selectedDate);
+                showMealDetail(selectedDate);
             }
         });
     }
@@ -362,7 +353,14 @@ public class ChooseMealBoarderActivity extends AppCompatActivity {
 
                 //Toast.makeText(ChooseMealBoarderActivity.this,responseShow,Toast.LENGTH_SHORT).show();
                 alertDialog.dismiss();
-                showMealDetail(selectedDate);
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        showMealDetail(selectedDate);
+                    }
+                }, 500);
 
             }
 

@@ -5,9 +5,19 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.mess_management_app.utils.SessionManager;
 import com.google.android.material.navigation.NavigationView;
@@ -16,6 +26,7 @@ public class MainBoarderActivity extends AppCompatActivity {
     ActionBarDrawerToggle toggle;
     NavigationView navView;
     SessionManager sessionManager;
+    ImageView profilePic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +45,9 @@ public class MainBoarderActivity extends AppCompatActivity {
 
 
 
+
+
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -42,10 +56,11 @@ public class MainBoarderActivity extends AppCompatActivity {
                 if(item.getItemId()==R.id.updateInfo){
                     Intent intent=new Intent(MainBoarderActivity.this,UpdateInfoBoarderActivity.class);
                     startActivity(intent);
+
                 }
 
                 if(item.getItemId()==R.id.updatePasswordBoarder){
-                    Intent intent=new Intent(MainBoarderActivity.this,UpdateInfoBoarderActivity.class);
+                    Intent intent=new Intent(MainBoarderActivity.this,UpdatePasswordBoarderActivity.class);
                     startActivity(intent);
                 }
 
@@ -54,20 +69,31 @@ public class MainBoarderActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
 
-                if(item.getItemId()==R.id.mealOnOff){
-                    Intent intent=new Intent(MainBoarderActivity.this,MealOnOffBoarderActivity.class);
-                    startActivity(intent);
-                }
+
                 if(item.getItemId()==R.id.logoutBoarder){
-                    Intent intent=new Intent(MainBoarderActivity.this,LoginActivity.class);
-                    sessionManager.logOut();
-                    startActivity(intent);
-                    finish();
+                    exitDialog();
                 }
                 drawerLayout.closeDrawers();
                 return true;
             }
         });
+    }
+
+    private void exitDialog(){
+        new AlertDialog.Builder(MainBoarderActivity.this)
+                .setMessage("Are you sure want to exit?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent=new Intent(MainBoarderActivity.this,LoginActivity.class);
+                        sessionManager.logOut();
+                        startActivity(intent);
+                        finish();
+                    }
+                })
+                .setNegativeButton("No",null)
+                .show();
     }
 
     @Override

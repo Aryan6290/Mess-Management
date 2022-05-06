@@ -3,6 +3,7 @@
     package="com.example.mess_management_app" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -13,33 +14,42 @@
         android:theme="@style/Theme.Mess_Management_App" >
         <activity
             android:name=".MealOnOffBoarderActivity"
+            android:label="Meal On/Off"
             android:exported="false" />
         <activity
             android:name=".ChooseMealBoarderActivity"
+            android:label="Choose Meal"
             android:exported="false" />
         <activity
             android:name=".UpdatePasswordBoarderActivity"
+            android:label="Update Password"
             android:exported="false" />
         <activity
             android:name=".UpdateInfoBoarderActivity"
+            android:label="Update Detail"
             android:exported="false" />
         <activity
             android:name=".MealCountDetailAdminActivity"
             android:exported="false" />
         <activity
             android:name=".UpdateMenuAdminActivity"
+            android:label="Update Menu"
             android:exported="false" />
         <activity
             android:name=".UpdatePasswordAdminActivity"
+            android:label="Update Password"
             android:exported="false" />
         <activity
             android:name=".AddBoarderAdminActivity"
+            android:label="Add Boarder"
             android:exported="false" />
         <activity
             android:name=".MainBoarderActivity"
+            android:label="Boarder"
             android:exported="false" />
         <activity
             android:name=".MainAdminActivity"
+            android:label="Admin"
             android:exported="false" />
         <activity
             android:name=".SplashActivity"
@@ -55,9 +65,11 @@
             android:exported="false" />
         <activity
             android:name=".LoginAdminActivity"
+            android:label="Login"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
+            android:label="Login"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

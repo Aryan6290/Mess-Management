@@ -3,7 +3,6 @@ package com.example.mess_management_app;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -20,25 +19,18 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.mess_management_app.adapter.MealAdapter;
-import com.example.mess_management_app.model.Meals;
 import com.example.mess_management_app.utils.SessionManager;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.UnsupportedEncodingException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class UpdateMenuAdminActivity extends AppCompatActivity {
 
-    EditText mondayDayText,mondayNightText,tuesdayDayText,tuesdayNightText,wednesdayDayText,wednesdayNightText,thursdayDayText,thursdayNightText,fridayDayText,fridayNightText,saturdayDayText,saturdayNightText,sundayDayText,sundayNightText;
+    EditText mondayVegText, mondayNonVegText, tuesdayVegText, tuesdayNonVegText, wednesdayVegText, wednesdayNonVegText, thursdayVegText, thursdayNonVegText, fridayVegText, fridayNonVegText, saturdayVegText, saturdayNonVegText, sundayVegText, sundayNonVegText;
     RadioGroup mondayGroup,tuesdayGroup,wednesdayGroup,thursdayGroup,fridayGroup,saturdayGroup,sundayGroup;
     RadioButton mondayButton,tuesdayButton,wednesdayButton,thursdayButton,fridayButton,saturdayButton,sundayButton;
     Button saveButton;
@@ -54,20 +46,20 @@ public class UpdateMenuAdminActivity extends AppCompatActivity {
         fridayGroup=findViewById(R.id.fridayRadioGroup);
         saturdayGroup=findViewById(R.id.saturdayRadioGroup);
         sundayGroup=findViewById(R.id.sundayRadioGroup);
-        mondayDayText=findViewById(R.id.mondayDayEditText);
-        mondayNightText=findViewById(R.id.mondayNightEditText);
-        tuesdayDayText=findViewById(R.id.tuesdayDayEditText);
-        tuesdayNightText=findViewById(R.id.tuesdayNightEditText);
-        wednesdayDayText=findViewById(R.id.wednesdayDayEditText);
-        wednesdayNightText=findViewById(R.id.wednesdayNightEditText);
-        thursdayDayText=findViewById(R.id.thursdayDayEditText);
-        thursdayNightText=findViewById(R.id.thursdayNightEditText);
-        fridayDayText=findViewById(R.id.fridayDayEditText);
-        fridayNightText=findViewById(R.id.fridayNightEditText);
-        saturdayDayText=findViewById(R.id.saturdayDayEditText);
-        saturdayNightText=findViewById(R.id.saturdayNightEditText);
-        sundayDayText=findViewById(R.id.sundayDayEditText);
-        sundayNightText=findViewById(R.id.sundayNightEditText);
+        mondayVegText =findViewById(R.id.mondayVegEditText);
+        mondayNonVegText =findViewById(R.id.mondayNonVegEditText);
+        tuesdayVegText =findViewById(R.id.tuesdayVegEditText);
+        tuesdayNonVegText =findViewById(R.id.tuesdayNonVegEditText);
+        wednesdayVegText =findViewById(R.id.wednesdayVegEditText);
+        wednesdayNonVegText =findViewById(R.id.wednesdayNonVegEditText);
+        thursdayVegText =findViewById(R.id.thursdayVegEditText);
+        thursdayNonVegText =findViewById(R.id.thursdayNonVegEditText);
+        fridayVegText =findViewById(R.id.fridayVegEditText);
+        fridayNonVegText =findViewById(R.id.fridayNonVegEditText);
+        saturdayVegText =findViewById(R.id.saturdayVegEditText);
+        saturdayNonVegText =findViewById(R.id.saturdayNonVegEditText);
+        sundayVegText =findViewById(R.id.sundayVegEditText);
+        sundayNonVegText =findViewById(R.id.sundayNonVegEditText);
 
         getMealSchedule();
 
@@ -103,71 +95,91 @@ public class UpdateMenuAdminActivity extends AppCompatActivity {
                 Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Log.d("check","response");
+                try {
+                    Log.d("check",response.getString("data"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
                 try {
                     Toast.makeText(UpdateMenuAdminActivity.this,response.getString("message"),Toast.LENGTH_SHORT).show();
                     JSONObject jsonObject=response.getJSONObject("data");
+
                     JSONObject monJson=jsonObject.getJSONObject("monday");
-                    String monDay=monJson.getString("day");
-                    String monNight=monJson.getString("night");
-                    Log.d("check mon",monDay);
-                    Log.d("check mon",monNight);
+                    JSONObject monDayJson=monJson.getJSONObject("day");
+                    String monDayVeg=monDayJson.getString("veg");
+                    String monDayNonVeg=monDayJson.getString("nonveg");
+                    Log.d("check mon",monDayVeg);
+                    Log.d("check mon",monDayNonVeg);
 
                     JSONObject tueJson=jsonObject.getJSONObject("tuesday");
-                    String tueDay=tueJson.getString("day");
-                    String tueNight=tueJson.getString("night");
-                    Log.d("check tue",tueDay);
-                    Log.d("check tue",tueNight);
+                    JSONObject tueDayJson=tueJson.getJSONObject("day");
+                    String tueDayVeg=tueDayJson.getString("veg");
+                    String tueDayNonVeg=tueDayJson.getString("nonveg");
+                    Log.d("check tue",tueDayVeg);
+                    Log.d("check tue",tueDayNonVeg);
 
 
                     JSONObject wedJson=jsonObject.getJSONObject("wednesday");
-                    String wedDay=wedJson.getString("day");
-                    String wedNight=wedJson.getString("night");
-                    Log.d("check tue",wedDay);
-                    Log.d("check tue",wedNight);
+                    JSONObject wedDayJson=wedJson.getJSONObject("day");
+                    String wedDayVeg=wedDayJson.getString("veg");
+                    String wedDayNonVeg=wedDayJson.getString("nonveg");
+                    Log.d("check wed",wedDayVeg);
+                    Log.d("check wed",wedDayNonVeg);
 
 
                     JSONObject thusJson=jsonObject.getJSONObject("thursday");
-                    String thusDay=thusJson.getString("day");
-                    String thusNight=thusJson.getString("night");
+                    JSONObject thusDayJson=thusJson.getJSONObject("day");
+                    String thusDayVeg=thusDayJson.getString("veg");
+                    String thusDayNonVeg=thusDayJson.getString("nonveg");
+                    Log.d("check thus",thusDayVeg);
+                    Log.d("check thus",thusDayNonVeg);
 
 
                     JSONObject friJson=jsonObject.getJSONObject("friday");
-                    String friDay=friJson.getString("day");
-                    String friNight=friJson.getString("night");
+                    JSONObject friDayJson=friJson.getJSONObject("day");
+                    String friDayVeg=friDayJson.getString("veg");
+                    String friDayNonVeg=friDayJson.getString("nonveg");
+                    Log.d("check fri",friDayVeg);
+                    Log.d("check fri",friDayNonVeg);
 
 
                     JSONObject satJson=jsonObject.getJSONObject("saturday");
-                    String satDay=satJson.getString("day");
-                    String satNight=satJson.getString("night");
+                    JSONObject satDayJson=satJson.getJSONObject("day");
+                    String satDayVeg=satDayJson.getString("veg");
+                    String satDayNonVeg=satDayJson.getString("nonveg");
+                    Log.d("check sat",satDayVeg);
+                    Log.d("check sat",satDayNonVeg);
 
 
                     JSONObject sunJson=jsonObject.getJSONObject("sunday");
-                    String sunDay=sunJson.getString("day");
-                    String sunNight=sunJson.getString("night");
+                    JSONObject sunDayJson=sunJson.getJSONObject("day");
+                    String sunDayVeg=sunDayJson.getString("veg");
+                    String sunDayNonVeg=sunDayJson.getString("nonveg");
+                    Log.d("check sun",sunDayVeg);
+                    Log.d("check sun",sunDayNonVeg);
 
 
-                    mondayDayText.setText(monDay);
-                    mondayNightText.setText(monNight);
+                    mondayVegText.setText(monDayVeg);
+                    mondayNonVegText.setText(monDayNonVeg);
 
-                    tuesdayDayText.setText(tueDay);
-                    tuesdayNightText.setText(tueNight);
+                    tuesdayVegText.setText(tueDayVeg);
+                    tuesdayNonVegText.setText(tueDayNonVeg);
 
-                    wednesdayDayText.setText(wedDay);
-                    wednesdayNightText.setText(wedNight);
+                    wednesdayVegText.setText(wedDayVeg);
+                    wednesdayNonVegText.setText(wedDayNonVeg);
 
-                    thursdayDayText.setText(thusDay);
-                    thursdayNightText.setText(thusNight);
+                    thursdayVegText.setText(thusDayVeg);
+                    thursdayNonVegText.setText(thusDayNonVeg);
 
-                    fridayDayText.setText(friDay);
-                    fridayNightText.setText(friNight);
+                    fridayVegText.setText(friDayVeg);
+                    fridayNonVegText.setText(friDayNonVeg);
 
-                    saturdayDayText.setText(satDay);
-                    saturdayNightText.setText(satNight);
+                    saturdayVegText.setText(satDayVeg);
+                    saturdayNonVegText.setText(satDayNonVeg);
 
-                    sundayDayText.setText(sunDay);
-                    sundayNightText.setText(sunNight);
+                    sundayVegText.setText(sunDayVeg);
+                    sundayNonVegText.setText(sunDayNonVeg);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -202,85 +214,122 @@ public class UpdateMenuAdminActivity extends AppCompatActivity {
                 mondayButton=findViewById(mondayId);
                 String mondayText= (String) mondayButton.getText();
 
-                String mondayDayMeal="",mondayNightMeal="";
+                String mondayDayVegMeal="",mondayDayNonVegMeal="";
+                String mondayNightVegMeal="",mondayNightNonVegMeal="";
                 if(mondayText.equals("Day")){
-                    mondayDayMeal=mondayDayText.getText().toString().trim();
+                    mondayDayVegMeal= mondayVegText.getText().toString().trim();
+                    mondayDayNonVegMeal= mondayNonVegText.getText().toString().trim();
                 }else{
-                    mondayNightMeal=mondayNightText.getText().toString().trim();
+                    mondayNightVegMeal= mondayVegText.getText().toString().trim();
+                    mondayNightNonVegMeal= mondayNonVegText.getText().toString().trim();
                 }
 
-                Log.d("meal hai eafsd",mondayDayMeal+mondayNightMeal);
+                //Log.d("meal hai eafsd",mondayDayMeal+mondayNightMeal);
                 int tuesdayId=tuesdayGroup.getCheckedRadioButtonId();
                 tuesdayButton=findViewById(tuesdayId);
                 String tuesdayText= (String) tuesdayButton.getText();
 
-                String tuesdayDayMeal="",tuesdayNightMeal="";
+                String tuesdayDayVegMeal="",tuesdayDayNonVegMeal="";
+                String tuesdayNightVegMeal="",tuesdayNightNonVegMeal="";
                 if(tuesdayText.equals("Day")){
-                    tuesdayDayMeal=tuesdayDayText.getText().toString().trim();
+                    tuesdayDayVegMeal= tuesdayVegText.getText().toString().trim();
+                    tuesdayDayNonVegMeal= tuesdayNonVegText.getText().toString().trim();
                 }else{
-                    tuesdayNightMeal=tuesdayNightText.getText().toString().trim();
+                    tuesdayNightVegMeal= tuesdayVegText.getText().toString().trim();
+                    tuesdayNightNonVegMeal= tuesdayNonVegText.getText().toString().trim();
                 }
 
                 int wednesdayId=wednesdayGroup.getCheckedRadioButtonId();
                 wednesdayButton=findViewById(wednesdayId);
                 String wednesdayText= (String) wednesdayButton.getText();
 
-                String wednesdayDayMeal="",wednesdayNightMeal="";
+                String wednesdayDayVegMeal="",wednesdayDayNonVegMeal="";
+                String wednesdayNightVegMeal="",wednesdayNightNonVegMeal="";
                 if(wednesdayText.equals("Day")){
-                    wednesdayDayMeal=wednesdayDayText.getText().toString().trim();
+                    wednesdayDayVegMeal= wednesdayVegText.getText().toString().trim();
+                    wednesdayDayNonVegMeal= wednesdayNonVegText.getText().toString().trim();
                 }else{
-                    wednesdayNightMeal=wednesdayNightText.getText().toString().trim();
+                    wednesdayNightVegMeal= wednesdayVegText.getText().toString().trim();
+                    wednesdayNightNonVegMeal= wednesdayNonVegText.getText().toString().trim();
                 }
 
                 int thursdayId=thursdayGroup.getCheckedRadioButtonId();
                 thursdayButton=findViewById(thursdayId);
                 String thursdayText= (String) thursdayButton.getText();
 
-                String thursdayDayMeal="",thursdayNightMeal="";
+                String thursdayDayVegMeal="",thursdayDayNonVegMeal="";
+                String thursdayNightVegMeal="",thursdayNightNonVegMeal="";
                 if(thursdayText.equals("Day")){
-                    thursdayDayMeal=thursdayDayText.getText().toString().trim();
+                    thursdayDayVegMeal= thursdayVegText.getText().toString().trim();
+                    thursdayDayNonVegMeal= thursdayNonVegText.getText().toString().trim();
                 }else{
-                    thursdayNightMeal=thursdayNightText.getText().toString().trim();
+                    thursdayNightVegMeal= thursdayVegText.getText().toString().trim();
+                    thursdayNightNonVegMeal= thursdayNonVegText.getText().toString().trim();
                 }
 
                 int fridayId=fridayGroup.getCheckedRadioButtonId();
                 fridayButton=findViewById(fridayId);
                 String fridayText= (String) fridayButton.getText();
 
-                String fridayDayMeal="",fridayNightMeal="";
+                String fridayDayVegMeal="",fridayDayNonVegMeal="";
+                String fridayNightVegMeal="",fridayNightNonVegMeal="";
                 if(fridayText.equals("Day")){
-                    fridayDayMeal=fridayDayText.getText().toString().trim();
+                    fridayDayVegMeal= fridayVegText.getText().toString().trim();
+                    fridayDayNonVegMeal= fridayNonVegText.getText().toString().trim();
                 }else{
-                    fridayNightMeal=fridayNightText.getText().toString().trim();
+                    fridayNightVegMeal= fridayVegText.getText().toString().trim();
+                    fridayNightNonVegMeal= fridayNonVegText.getText().toString().trim();
                 }
 
                 int saturdayId=saturdayGroup.getCheckedRadioButtonId();
                 saturdayButton=findViewById(saturdayId);
                 String saturdayText= (String) saturdayButton.getText();
 
-                String saturdayDayMeal="",saturdayNightMeal="";
+                String saturdayDayVegMeal="",saturdayDayNonVegMeal="";
+                String saturdayNightVegMeal="",saturdayNightNonVegMeal="";
                 if(saturdayText.equals("Day")){
-                    saturdayDayMeal=saturdayDayText.getText().toString().trim();
+                    saturdayDayVegMeal= saturdayVegText.getText().toString().trim();
+                    saturdayDayNonVegMeal= saturdayNonVegText.getText().toString().trim();
                 }else{
-                    saturdayNightMeal=saturdayNightText.getText().toString().trim();
+                    saturdayNightVegMeal= saturdayVegText.getText().toString().trim();
+                    saturdayNightNonVegMeal= saturdayNonVegText.getText().toString().trim();
                 }
 
                 int sundayId=sundayGroup.getCheckedRadioButtonId();
                 sundayButton=findViewById(sundayId);
                 String sundayText= (String) sundayButton.getText();
 
-                String sundayDayMeal="",sundayNightMeal="";
+                String sundayDayVegMeal="",sundayDayNonVegMeal="";
+                String sundayNightVegMeal="",sundayNightNonVegMeal="";
                 if(sundayText.equals("Day")){
-                    sundayDayMeal=sundayDayText.getText().toString().trim();
+                    sundayDayVegMeal= sundayVegText.getText().toString().trim();
+                    sundayDayNonVegMeal= sundayNonVegText.getText().toString().trim();
                 }else{
-                    sundayNightMeal=sundayNightText.getText().toString().trim();
+                    sundayNightVegMeal= sundayVegText.getText().toString().trim();
+                    sundayNightNonVegMeal= sundayNonVegText.getText().toString().trim();
                 }
 
 
+                JSONObject mondayDay= new JSONObject();
+                try {
+                    mondayDay.put("veg",mondayDayVegMeal);
+                    mondayDay.put("nonveg",mondayDayNonVegMeal);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                JSONObject mondayNight= new JSONObject();
+                try {
+                    mondayDay.put("veg",mondayNightVegMeal);
+                    mondayDay.put("nonveg",mondayNightNonVegMeal);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
                 JSONObject mondayJson= new JSONObject();
                 try {
-                    mondayJson.put("day",mondayDayMeal);
-                    mondayJson.put("night",mondayNightMeal);
+                    mondayJson.put("day",mondayDay);
+                    mondayJson.put("night",mondayNight);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -292,50 +341,151 @@ public class UpdateMenuAdminActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                JSONObject tuesdayJson= new JSONObject();
+
+                JSONObject tuesdayDay= new JSONObject();
                 try {
-                    tuesdayJson.put("day",tuesdayDayMeal);
-                    tuesdayJson.put("night",tuesdayNightMeal);
+                    tuesdayDay.put("veg",tuesdayDayVegMeal);
+                    tuesdayDay.put("nonveg",tuesdayDayNonVegMeal);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
+                JSONObject tuesdayNight= new JSONObject();
+                try {
+                    tuesdayNight.put("veg",tuesdayNightVegMeal);
+                    tuesdayNight.put("nonveg",tuesdayNightNonVegMeal);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                JSONObject tuesdayJson= new JSONObject();
+                try {
+                    tuesdayJson.put("day",tuesdayDay);
+                    tuesdayJson.put("night",tuesdayNight);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+                JSONObject wednesdayDay= new JSONObject();
+                try {
+                    wednesdayDay.put("veg",wednesdayDayVegMeal);
+                    wednesdayDay.put("nonveg",wednesdayDayNonVegMeal);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                JSONObject wednesdayNight= new JSONObject();
+                try {
+                    wednesdayNight.put("veg",wednesdayNightVegMeal);
+                    wednesdayNight.put("nonveg",wednesdayNightNonVegMeal);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
                 JSONObject wednesdayJson= new JSONObject();
                 try {
-                    wednesdayJson.put("day",wednesdayDayMeal);
-                    wednesdayJson.put("night",wednesdayNightMeal);
+                    wednesdayJson.put("day",wednesdayDay);
+                    wednesdayJson.put("night",wednesdayNight);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+                JSONObject thursdayDay= new JSONObject();
+                try {
+                    thursdayDay.put("veg",thursdayDayVegMeal);
+                    thursdayDay.put("nonveg",thursdayDayNonVegMeal);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                JSONObject thursdayNight= new JSONObject();
+                try {
+                    thursdayNight.put("veg",thursdayNightVegMeal);
+                    thursdayNight.put("nonveg",thursdayNightNonVegMeal);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
                 JSONObject thursdayJson= new JSONObject();
                 try {
-                    thursdayJson.put("day",thursdayDayMeal);
-                    thursdayJson.put("night",thursdayNightMeal);
+                    thursdayJson.put("day",thursdayDay);
+                    thursdayJson.put("night",thursdayNight);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+                JSONObject fridayDay= new JSONObject();
+                try {
+                    fridayDay.put("veg",fridayDayVegMeal);
+                    fridayDay.put("nonveg",fridayDayNonVegMeal);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                JSONObject fridayNight= new JSONObject();
+                try {
+                    fridayNight.put("veg",fridayNightVegMeal);
+                    fridayNight.put("nonveg",fridayNightNonVegMeal);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
                 JSONObject fridayJson= new JSONObject();
                 try {
-                    fridayJson.put("day",fridayDayMeal);
-                    fridayJson.put("night",fridayNightMeal);
+                    fridayJson.put("day",fridayDay);
+                    fridayJson.put("night",fridayNight);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                JSONObject saturdayDay= new JSONObject();
+                try {
+                    saturdayDay.put("veg",saturdayDayVegMeal);
+                    saturdayDay.put("nonveg",saturdayDayNonVegMeal);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                JSONObject saturdayNight= new JSONObject();
+                try {
+                    saturdayNight.put("veg",saturdayNightVegMeal);
+                    saturdayNight.put("nonveg",saturdayNightNonVegMeal);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
                 JSONObject saturdayJson= new JSONObject();
                 try {
-                    saturdayJson.put("day",saturdayDayMeal);
-                    saturdayJson.put("night",saturdayNightMeal);
+                    saturdayJson.put("day",saturdayDay);
+                    saturdayJson.put("night",saturdayNight);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                JSONObject sundayDay= new JSONObject();
+                try {
+                    sundayDay.put("veg",sundayDayVegMeal);
+                    sundayDay.put("nonveg",sundayDayNonVegMeal);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                JSONObject sundayNight= new JSONObject();
+                try {
+                    sundayNight.put("veg",sundayNightVegMeal);
+                    sundayNight.put("nonveg",sundayNightNonVegMeal);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
                 JSONObject sundayJson= new JSONObject();
                 try {
-                    sundayJson.put("day",sundayDayMeal);
-                    sundayJson.put("night",sundayNightMeal);
+                    sundayJson.put("day",sundayDay);
+                    sundayJson.put("night",sundayNight);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
