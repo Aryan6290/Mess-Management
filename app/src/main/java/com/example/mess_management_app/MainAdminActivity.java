@@ -30,12 +30,15 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.mess_management_app.adapter.MealAdapter;
 import com.example.mess_management_app.model.Meals;
+import com.example.mess_management_app.model.MealsXY;
 import com.example.mess_management_app.utils.SessionManager;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -182,16 +185,25 @@ public class MainAdminActivity extends AppCompatActivity {
 
                 try {
                     JSONArray Jarray = response.getJSONArray("meals");
-                    ArrayList<Meals>temp = new ArrayList();
+
+
+                    ArrayList<Meals>temp = new ArrayList<Meals>();
                     for (int i=0;i<Jarray.length();i++){
                         //Adding each element of JSON array into ArrayList
+
                         JSONObject object = Jarray.getJSONObject(i);
+                        JSONObject object2=object.getJSONObject("userDetails");
+                        Log.d("object", String.valueOf(object2));
                         Meals editDoctorModel = new Meals();
                         editDoctorModel.set_id(object.getString("_id"));
                         editDoctorModel.setUserId(object.getString("userId"));
                         editDoctorModel.setType(object.getString("type"));
                         editDoctorModel.setDate(object.getString("date"));
                         editDoctorModel.setTime(object.getString("time"));
+
+                        editDoctorModel.setUserName(object2.getString("userName"));
+                        editDoctorModel.setImage(object2.getString("image"));
+
 
                         count[0]++;
                         if(object.getString("type")=="veg"){
@@ -201,7 +213,9 @@ public class MainAdminActivity extends AppCompatActivity {
                         }
                         temp.add(editDoctorModel);
                     }
-
+                    for(int i=0;i<temp.size();i++){
+                        Log.i("check",temp.get(i).getUserName());
+                    }
                    totalCountShow.setText(String.valueOf(count[0]));
                     totalNonVegCountShow.setText(String.valueOf(nonVeg[0]));
                     totalVegCountShow.setText(String.valueOf(veg[0]));

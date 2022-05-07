@@ -4,6 +4,26 @@ public class Meals {
     String _id;
     String userId;
     String date;
+    String type;
+    String time;
+    String image;
+    String userName;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public String get_id() {
         return _id;
@@ -45,6 +65,5 @@ public class Meals {
         this.time = time;
     }
 
-    String type;
-    String time;
+
 }

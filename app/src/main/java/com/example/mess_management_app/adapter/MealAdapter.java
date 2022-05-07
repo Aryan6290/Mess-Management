@@ -39,7 +39,7 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ItemViewHolder
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         Meals current= meal.get(position);
-        //holder.nameShow.setText(current.);
+        holder.nameShow.setText(current.getUserName());
         holder.typeShow.setText(current.getType());
         //Glide.with(context).load(current.getDate()).into(holder.profileImage);
 //        holder.dateShow.setText(current.getDate());
@@ -50,7 +50,8 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.ItemViewHolder
 
     @Override
     public int getItemCount() {
-        return meal == null ? 0 : meal.size();
+
+        return  meal.size();
     }
 
     public class ItemViewHolder extends RecyclerView.ViewHolder{
