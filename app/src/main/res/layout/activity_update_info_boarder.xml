@@ -79,12 +79,5 @@
         app:layout_constraintTop_toBottomOf="@id/nameTextInfo"
         app:layout_constraintLeft_toRightOf="@id/rollNoTextInfo" />
 
-    <TextView
-        android:id="@+id/baseText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/rollNoTextInfo"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

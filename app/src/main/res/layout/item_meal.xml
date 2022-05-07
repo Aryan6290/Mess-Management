@@ -27,7 +27,7 @@
             android:id="@+id/nameTextItem"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Ranjan kumar Das"
+            android:text="Amartya"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/black"
