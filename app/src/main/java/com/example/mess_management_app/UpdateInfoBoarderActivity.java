@@ -60,7 +60,6 @@ public class UpdateInfoBoarderActivity extends AppCompatActivity {
         rollNoText=findViewById(R.id.rollNoShowInfo);
         updateButton=findViewById(R.id.updateImage);
         profilePicture=findViewById(R.id.profile_image);
-        baseText=findViewById(R.id.baseText);
 
          sessionManager=new SessionManager(UpdateInfoBoarderActivity.this);
          userId=sessionManager.getUser().get_id();
