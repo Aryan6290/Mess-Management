@@ -73,6 +73,12 @@ public class MainBoarderActivity extends AppCompatActivity {
                 if(item.getItemId()==R.id.logoutBoarder){
                     exitDialog();
                 }
+
+                if(item.getItemId()==R.id.onOffMeal){
+                    Intent intent=new Intent(MainBoarderActivity.this,MealOnOffBoarderActivity.class);
+                    startActivity(intent);
+                }
+
                 drawerLayout.closeDrawers();
                 return true;
             }
