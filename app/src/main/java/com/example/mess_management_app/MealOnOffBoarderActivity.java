@@ -6,9 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import com.example.mess_management_app.utils.SessionManager;
 
 public class MealOnOffBoarderActivity extends AppCompatActivity {
 
+    SessionManager sessionManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +23,9 @@ public class MealOnOffBoarderActivity extends AppCompatActivity {
 
         // showing the back button in action bar
         actionBar.setDisplayHomeAsUpEnabled(true);
+        sessionManager= new SessionManager(this);
+        TextView textView=findViewById(R.id.nameTextOnOff);
+        textView.setText(sessionManager.getUser().getUserName());
     }
 
     // this event will enable the back
@@ -32,4 +39,5 @@ public class MealOnOffBoarderActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

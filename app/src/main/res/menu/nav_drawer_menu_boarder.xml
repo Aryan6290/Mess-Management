@@ -12,12 +12,14 @@
         android:icon="@drawable/ic_set_meal"
         android:title="Choose Meal"/>
 
+    <item android:id="@+id/onOffMeal"
+        android:icon="@drawable/ic_swap_horizontal"
+        android:title="On/Off Meal"/>
+
 
     <item android:id="@+id/logoutBoarder"
         android:icon="@drawable/logout_svgrepo_com"
         android:title="Log out"/>
 
-    <item android:id="@+id/onOffMeal"
-        android:icon="@drawable/ic_swap_horizontal"
-        android:title="On/Off Meal"/>
+
 </menu>
