@@ -71,7 +71,8 @@ public class ChooseMealBoarderActivity extends AppCompatActivity {
     String selectedTime,selectedType,userId,selectedDate,responseShow;
     CardView dayCardView,nightCardView;
     long timeInMilliseconds = 0;
-
+    String monDayVeg,monDayNonVeg,tueDayVeg,tueDayNonVeg,wedDayVeg,wedDayNonVeg,thusDayVeg,thusDayNonVeg,friDayVeg,friDayNonVeg,satDayVeg,satDayNonVeg,sunDayVeg,sunDayNonVeg;
+    String currentDay,vegDay,nonVegDay,nightVeg,nightNonVeg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +85,7 @@ public class ChooseMealBoarderActivity extends AppCompatActivity {
         nameText=findViewById(R.id.nameText);
         dateToday=findViewById(R.id.dateToday);
         FloatingActionButton fButton=findViewById(R.id.floatingActionButton);
-
+        getScheduleMeal();
 
         sessionManager=new SessionManager(ChooseMealBoarderActivity.this);
         Log.d("admin meal id",sessionManager.getUser().get_id());
@@ -260,6 +261,145 @@ public class ChooseMealBoarderActivity extends AppCompatActivity {
         });
     }
 
+    void getScheduleMeal(){
+        Calendar calendar = Calendar.getInstance();
+        Date date = calendar.getTime();
+         // full name form of the day
+        currentDay=new SimpleDateFormat("EEEE", Locale.ENGLISH).format(date.getTime());
+        Log.d("ffff",currentDay);
+
+        String url = "https://kgec-mess-backend.herokuapp.com/api/meal/schedule/get";
+
+        ProgressDialog pDialog = new ProgressDialog(ChooseMealBoarderActivity.this);
+        pDialog.setMessage("Loading...PLease wait");
+        pDialog.show();
+
+
+        JsonObjectRequest jsonObjectRequest=new JsonObjectRequest(
+                Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    Log.d("check",response.getString("data"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    Toast.makeText(ChooseMealBoarderActivity.this,response.getString("message"),Toast.LENGTH_SHORT).show();
+                    JSONObject jsonObject=response.getJSONObject("data");
+
+                    JSONObject monJson=jsonObject.getJSONObject("monday");
+                    JSONObject monDayJson=monJson.getJSONObject("day");
+                    monDayVeg=monDayJson.getString("veg");
+                    monDayNonVeg=monDayJson.getString("nonveg");
+                    Log.d("check mon",monDayVeg);
+                    Log.d("check mon",monDayNonVeg);
+
+                    JSONObject tueJson=jsonObject.getJSONObject("tuesday");
+                    JSONObject tueDayJson=tueJson.getJSONObject("day");
+                    tueDayVeg=tueDayJson.getString("veg");
+                    tueDayNonVeg=tueDayJson.getString("nonveg");
+                    Log.d("check tue",tueDayVeg);
+                    Log.d("check tue",tueDayNonVeg);
+
+
+                    JSONObject wedJson=jsonObject.getJSONObject("wednesday");
+                    JSONObject wedDayJson=wedJson.getJSONObject("day");
+                    wedDayVeg=wedDayJson.getString("veg");
+                    wedDayNonVeg=wedDayJson.getString("nonveg");
+                    Log.d("check wed",wedDayVeg);
+                    Log.d("check wed",wedDayNonVeg);
+
+
+                    JSONObject thusJson=jsonObject.getJSONObject("thursday");
+                    JSONObject thusDayJson=thusJson.getJSONObject("day");
+                    thusDayVeg=thusDayJson.getString("veg");
+                    thusDayNonVeg=thusDayJson.getString("nonveg");
+                    Log.d("check thus",thusDayVeg);
+                    Log.d("check thus",thusDayNonVeg);
+
+
+                    JSONObject friJson=jsonObject.getJSONObject("friday");
+                    JSONObject friDayJson=friJson.getJSONObject("day");
+                    friDayVeg=friDayJson.getString("veg");
+                    friDayNonVeg=friDayJson.getString("nonveg");
+                    Log.d("check fri",friDayVeg);
+                    Log.d("check fri",friDayNonVeg);
+
+
+                    JSONObject satJson=jsonObject.getJSONObject("saturday");
+                    JSONObject satDayJson=satJson.getJSONObject("day");
+                    satDayVeg=satDayJson.getString("veg");
+                    satDayNonVeg=satDayJson.getString("nonveg");
+                    Log.d("check sat",satDayVeg);
+                    Log.d("check sat",satDayNonVeg);
+
+
+                    JSONObject sunJson=jsonObject.getJSONObject("sunday");
+                    JSONObject sunDayJson=sunJson.getJSONObject("day");
+                    sunDayVeg=sunDayJson.getString("veg");
+                    sunDayNonVeg=sunDayJson.getString("nonveg");
+                    Log.d("check sun",sunDayVeg);
+                    Log.d("check sun",sunDayNonVeg);
+
+
+                    if(currentDay.equals("Monday")){
+                        vegDay=monDayVeg;
+                        nonVegDay=monDayNonVeg;
+                    }
+                    else if(currentDay.equals("Tuesday")){
+                        vegDay=tueDayVeg;
+                        nonVegDay=tueDayNonVeg;
+                    }else if(currentDay.equals("Wednesday")){
+                        vegDay=wedDayVeg;
+                        nonVegDay=wedDayNonVeg;
+                    }else if(currentDay.equals("Thursday")){
+                        vegDay=thusDayVeg;
+                        nonVegDay=thusDayNonVeg;
+                    }else if (currentDay.equals("Friday")){
+                        vegDay=friDayVeg;
+                        nonVegDay=friDayNonVeg;
+                    }
+                    else if(currentDay.equals("Saturday")){
+                        vegDay=satDayVeg;
+                        nonVegDay=satDayNonVeg;
+                    }else{
+                        vegDay=sunDayVeg;
+                        nonVegDay=sunDayNonVeg;
+                    }
+                   // Log.d("ffff",monDayVeg+monDayNonVeg);
+                    Log.d("ffff",vegDay+nonVegDay);
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                pDialog.dismiss();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("check","error");
+                Log.d("check", String.valueOf(error.networkResponse.statusCode));
+                String body="";
+                try {
+                    body = new String(error.networkResponse.data,"UTF-8");
+                    Log.d("check",body);
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                Toast.makeText(ChooseMealBoarderActivity.this,body.substring(12,body.length()-2),Toast.LENGTH_LONG).show();
+                pDialog.dismiss();
+                Log.d("satus code", String.valueOf(error.networkResponse.statusCode));
+            }
+        });
+        MySingleton.getInstance(ChooseMealBoarderActivity.this).addToRequestQueue(jsonObjectRequest);
+
+
+
+    }
+
     void addMeaL(String date){
         LayoutInflater layoutInflater=LayoutInflater.from(ChooseMealBoarderActivity.this);
         View view=layoutInflater.inflate(R.layout.dialog,null);
@@ -273,11 +413,12 @@ public class ChooseMealBoarderActivity extends AppCompatActivity {
         AutoCompleteTextView typeLayout,timeLayout;
         Button saveButton;
 
+
         saveButton=view.findViewById(R.id.savedButton);
         typeLayout=view.findViewById(R.id.autoCompleteTextViewType);
         timeLayout=view.findViewById(R.id.autoCompleteTextViewTime);
         String[] time={"day","night"};
-        String[] type= {"veg","nonveg"};
+        String[] type= {"veg"+"("+vegDay+")","nonveg"+"("+nonVegDay+")"};
         ArrayAdapter<String> timeAdapter=new ArrayAdapter<String>(ChooseMealBoarderActivity.this,R.layout.dropdown_item,time);
         ArrayAdapter<String> typeAdapter=new ArrayAdapter<String>(ChooseMealBoarderActivity.this,R.layout.dropdown_item,type);
         typeLayout.setAdapter(typeAdapter);
