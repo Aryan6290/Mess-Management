@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ChooseMealBoarderActivity">
 
-
     <TextView
         android:id="@+id/hiText"
         android:layout_width="wrap_content"
@@ -18,7 +17,6 @@
         android:textColor="@color/black"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
-
 
     <TextView
         android:id="@+id/nameText"
