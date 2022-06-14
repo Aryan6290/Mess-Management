@@ -69,12 +69,12 @@ public class ChooseMealBoarderActivity extends AppCompatActivity {
     private MaterialDatePicker<Long> materialDatePicker;
     private SessionManager sessionManager;
     ArrayList<DataX> arrayList;
-    TextView dayType,nightType,nameText,dateToday;
+    TextView dayType,nightType,nameText,dateToday,dayText,nightText;
     String selectedTime,selectedType,userId,selectedDate,responseShow;
     CardView dayCardView,nightCardView;
     long timeInMilliseconds = 0;
     String monDayVeg,monDayNonVeg,tueDayVeg,tueDayNonVeg,wedDayVeg,wedDayNonVeg,thusDayVeg,thusDayNonVeg,friDayVeg,friDayNonVeg,satDayVeg,satDayNonVeg,sunDayVeg,sunDayNonVeg;
-    String currentDay,vegDay,nonVegDay,nightVeg,nightNonVeg;
+    String currentDay,vegDay,nonVegDay,nightVeg,daySelected,nightSelected;
 
 
     @Override
@@ -88,6 +88,8 @@ public class ChooseMealBoarderActivity extends AppCompatActivity {
         nameText=findViewById(R.id.nameText);
         dateToday=findViewById(R.id.dateToday);
         FloatingActionButton fButton=findViewById(R.id.floatingActionButton);
+        dayText=findViewById(R.id.mealDayTextMeal);
+        nightText=findViewById(R.id.mealNightTextMeal);
 
         getScheduleMeal();
         sessionManager=new SessionManager(ChooseMealBoarderActivity.this);
@@ -300,6 +302,7 @@ public class ChooseMealBoarderActivity extends AppCompatActivity {
         });
         MySingleton.getInstance(ChooseMealBoarderActivity.this).addToRequestQueue(jsonObjectRequest);
 
+        Log.d("ffff outside",vegDay+nonVegDay);
 
 
     }
@@ -345,18 +348,32 @@ public class ChooseMealBoarderActivity extends AppCompatActivity {
                     if(i.getTime().equals("night")){
                         nightType.setText(i.getType());
                         //  nightType.setVisibility(View.VISIBLE);
+                        if(i.getType().equals("veg")) {
+                            nightText.setText(vegDay);
+                        }else{
+                            nightText.setText(nonVegDay);
+                        }
                         nightCardView.setVisibility(View.VISIBLE);
+
+                       // Log.d("ffff night",nightSelected);
                     }
 
                     Log.d("adada",i.get_id());
                     Log.d("adada",i.getTime());
                     Log.d("adada",i.getDate());
                     Log.d("adada",i.getType());
+                    Log.d("adada veg",vegDay);
 
                     if(i.getTime().equals("day")){
                         dayType.setText(i.getType());
+                        if(i.getType().equals("veg")) {
+                            dayText.setText(vegDay);
+                        }else{
+                            dayText.setText(nonVegDay);
+                        }
                         // dayType.setVisibility(View.VISIBLE);
                         dayCardView.setVisibility(View.VISIBLE);
+                     //   Log.d("ffff day",daySelected);
                     }
                 }
                 pDialog.dismiss();
@@ -439,7 +456,11 @@ public class ChooseMealBoarderActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String item=adapterView.getItemAtPosition(i).toString();
-                selectedType=item;
+                if(item.substring(0,3).equals("veg")){
+                    selectedType="veg";
+                }else {
+                    selectedType = "nonveg";
+                }
             }
         });
 
@@ -454,12 +475,27 @@ public class ChooseMealBoarderActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("gggg",vegDay+nonVegDay);
+                if(selectedTime.equals("day") && selectedType.equals("veg")){
+                    daySelected=vegDay;
+                }else if(selectedTime.equals("day") && selectedType.equals("nonveg")){
+                    daySelected=nonVegDay;
+                }else if(selectedTime.equals("night") && selectedType.equals("veg")){
+                    nightSelected=vegDay;
+                }else if(selectedTime.equals("night") && selectedType.equals("nonveg")){
+                    nightSelected=nonVegDay;
+                }
+
+                Log.d("chosee","saved button"+daySelected);
+                Log.d("chosee","saved button"+ nightSelected);
+
                 Log.d("chosee","saved button");
                 String url = "https://kgec-mess-backend.herokuapp.com/api/meal/add";
 
                 ProgressDialog pDialog = new ProgressDialog(ChooseMealBoarderActivity.this);
                 pDialog.setMessage("Loading...PLease wait");
                 pDialog.show();
+
 
                 Map params = new HashMap();
                 params.put("userId", userId);
